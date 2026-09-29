@@ -360,10 +360,10 @@ function genBody(){
   bodyGenerated=true;updateExportState();
 }
 function copyColorHub(){
-  const name=document.getElementById('cn-color').value||'Client';
+  const name=document.getElementById('cn-color').value||'there';
   const{key:seasonKey}=getSeason(CA);const d=colorData[seasonKey];const shape=BA.shape||'—';const family=SEASON_FAMILY[seasonKey];const arch=archetypesBySeasonFamily[family]?.[shape]||'That Girl';
-  const text=`STYLE ANALYSIS — ${name}\n\nStyle Archetype: ${arch}\nColor Type: ${d.label}\nMetal Tone: ${d.metal}\nPower Neutrals: ${d.neutrals.map(n=>n.n).join(', ')}\nSignature Colors: ${d.signature.map(s=>s.n).join(', ')}\nColors to Avoid: ${d.avoid}\n\n✦ Full analysis in your Style Guide`;
-  navigator.clipboard.writeText(text).then(()=>alert('Copied for Style Hub! Paste into their Style Profile in Notion. ✦'));
+  const text=`✦ Your Color Analysis ✦\n\n${name}, you're a ${d.label} — your Style Archetype is ${arch}. ✦\n\nMetal Tone: ${d.metal}\n\nYour Power Neutrals (build everything around these):\n${d.neutrals.map(n=>n.n).join(' · ')}\n\nYour Signature Colors (what makes you glow):\n${d.signature.map(s=>s.n).join(' · ')}\n\nColors to step back from: ${d.avoid}\n\nYour full Style Guide with the complete palette is on its way — this is just the beginning. ✦`;
+  navigator.clipboard.writeText(text).then(()=>alert('Copied for Style Hub! Paste into "Your Style Analysis" on their page. ✦'));
 }
 function copyColorGuide(){
   const name=document.getElementById('cn-color').value||'Client';
@@ -374,11 +374,11 @@ function copyColorGuide(){
   navigator.clipboard.writeText(text).then(()=>alert('Copied for Style Guide! ✦'));
 }
 function copyBodyHub(){
-  const name=document.getElementById('cn-body').value||'Client';
+  const name=document.getElementById('cn-body').value||'there';
   const shape=BA.shape;if(!shape)return;
   const d=bodyData[shape];const{key:seasonKey}=getSeason(CA);const family=SEASON_FAMILY[seasonKey];const arch=archetypesBySeasonFamily[family]?.[shape]||'That Girl';
-  const text=`BODY ANALYSIS — ${name}\n\nStyle Archetype: ${arch}\nBody Shape: ${d.shape}\nStyling Goal: ${d.goal}\nBest Silhouette: ${d.sils[0]}\nBest Necklines: ${d.necks.map(n=>n).join(' · ')}\n\n✦ Full analysis in your Style Guide`;
-  navigator.clipboard.writeText(text).then(()=>alert('Copied for Style Hub! Paste into their Style Profile in Notion. ✦'));
+  const text=`✦ Your Body & Silhouette Analysis ✦\n\n${name}, you're a ${d.shape}. ✦\n\nStyling Goal: ${d.goal}\n\nYour Best Silhouettes:\n${d.sils.slice(0,3).map(s=>'• '+s).join('\n')}\n\nYour Best Necklines:\n${d.necks.slice(0,2).map(n=>'• '+n).join('\n')}\n\nYour full Style Guide with the complete silhouette guide is on its way. ✦`;
+  navigator.clipboard.writeText(text).then(()=>alert('Copied for Style Hub! Paste into "Your Style Analysis" on their page. ✦'));
 }
 function copyBodyGuide(){
   const name=document.getElementById('cn-body').value||'Client';
