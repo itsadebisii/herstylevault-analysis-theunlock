@@ -11,13 +11,15 @@
 :root {
   --blush:#f2d9d0;--mauve:#c9a09a;--rose:#4e1d27;--deep-rose:#4e1d27;
   --cream:#fdf6f0;--warm-white:#fff9f6;--text-dark:#1a1010;--text-mid:#4a2e2e;
-  --text-light:#6b4a4a;--gold:#e4d2a5;--pkg:#c9a09a;--pkg-light:#f2d9d0;
+  --text-light:#6b4a4a;--gold:#e4d2a5;--pkg:#4e1d27;--pkg-light:#f2d9d0;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text-dark);min-height:100vh;}
-.header{background:var(--text-dark);padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between;}
-.header-logo{font-family:'Fraunces',serif;font-size:1.2rem;color:var(--blush);letter-spacing:0.08em;}
-.header-badge{font-size:0.55rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--pkg);border:1px solid rgba(232,160,170,0.4);padding:0.3rem 0.8rem;}
+.header{background:radial-gradient(120% 180% at 15% -10%, #6b2938 0%, var(--rose) 55%, #3a1420 100%);padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between;position:relative;overflow:hidden;}
+.header::after{content:'✦';position:absolute;top:1rem;right:1.6rem;color:var(--gold);opacity:0.35;font-size:1.1rem;}
+.header-logo{font-family:'Fraunces',serif;font-style:italic;font-size:1.2rem;color:var(--gold);letter-spacing:0.04em;display:flex;align-items:center;gap:0.5rem;}
+.header-logo svg{width:22px;height:22px;flex-shrink:0;}
+.header-badge{font-size:0.55rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(228,210,165,0.4);padding:0.3rem 0.8rem;}
 .pkg-banner{background:var(--pkg);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;}
 .pkg-banner-title{font-family:'Fraunces',serif;font-size:1.1rem;color:white;font-weight:300;}
 .pkg-banner-detail{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.7);}
@@ -55,13 +57,14 @@ textarea{width:100%;border:1px solid rgba(201,160,154,0.3);padding:0.8rem;font-s
 .stepnext:disabled{opacity:0.4;cursor:not-allowed;}
 .results{display:none;margin-top:2rem;}.results.vis{display:block;}
 .rhead{background:var(--text-dark);padding:1.5rem 2rem;margin-bottom:1rem;}
-.rhead-label{font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(232,160,170,0.6);margin-bottom:0.3rem;}
-.rhead-title{font-family:'Fraunces',serif;font-size:1.8rem;color:var(--blush);font-weight:300;}
-.rhead-title em{font-style:italic;color:var(--pkg);}
+.rhead-label{font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(228,210,165,0.7);margin-bottom:0.3rem;}
+.rhead-label::before,.rhead-label::after{content:'✦';margin:0 0.5em;opacity:0.6;}
+.rhead-title{font-family:'Fraunces',serif;font-size:1.8rem;color:var(--warm-white);font-weight:300;}
+.rhead-title em{font-style:italic;color:var(--gold);}
 .rhead-name{font-size:0.75rem;color:rgba(255,255,255,0.3);margin-top:0.3rem;}
 .archetype{background:var(--pkg);padding:1.2rem 2rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;}
 .arch-label{font-size:0.5rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:0.3rem;}
-.arch-name{font-family:'Fraunces',serif;font-size:1.5rem;color:white;font-style:italic;}
+.arch-name{font-family:'Fraunces',serif;font-size:1.5rem;color:var(--gold);font-style:italic;}
 .pkg-note{background:var(--pkg-light);border-left:3px solid var(--pkg);padding:0.8rem 1rem;margin-bottom:1rem;font-size:0.72rem;color:var(--text-mid);line-height:1.7;}
 .rcard{background:white;border:1px solid rgba(201,160,154,0.2);padding:1.5rem;margin-bottom:1rem;}
 .rcard-label{font-size:0.52rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--mauve);margin-bottom:0.5rem;}
@@ -75,7 +78,7 @@ textarea{width:100%;border:1px solid rgba(201,160,154,0.3);padding:0.8rem;font-s
 .ritem:last-child{border-bottom:none;}
 .ritem::before{content:'✦';color:var(--pkg);font-size:0.4rem;flex-shrink:0;margin-top:0.4rem;}
 .ritem.avoid::before{content:'✕';color:var(--rose);font-size:0.5rem;margin-top:0.35rem;}
-.avoid-box{background:rgba(232,160,170,0.08);border-left:3px solid var(--rose);padding:1rem 1.2rem;margin-top:0.8rem;}
+.avoid-box{background:rgba(78,29,39,0.06);border-left:3px solid var(--rose);padding:1rem 1.2rem;margin-top:0.8rem;}
 .avoid-label{font-size:0.5rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--deep-rose);margin-bottom:0.4rem;}
 .avoid-text{font-size:0.75rem;color:var(--text-mid);line-height:1.8;font-weight:300;}
 .tip-box{background:var(--blush);border-left:3px solid var(--deep-rose);padding:1rem 1.2rem;margin-top:0.8rem;}
@@ -83,7 +86,7 @@ textarea{width:100%;border:1px solid rgba(201,160,154,0.3);padding:0.8rem;font-s
 .ref-box{background:var(--pkg-light);border-left:3px solid var(--pkg);padding:0.8rem 1rem;margin-top:0.8rem;}
 .ref-label{font-size:0.48rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--pkg);margin-bottom:0.4rem;}
 .ref-links{display:flex;flex-wrap:wrap;gap:0.5rem;}
-.ref-link{font-size:0.68rem;color:var(--pkg);text-decoration:none;border:1px solid rgba(232,160,170,0.3);padding:0.2rem 0.6rem;transition:all 0.2s;}
+.ref-link{font-size:0.68rem;color:var(--pkg);text-decoration:none;border:1px solid rgba(228,210,165,0.6);padding:0.2rem 0.6rem;transition:all 0.2s;}
 .ref-link:hover{background:var(--pkg);color:white;}
 .fabric-box{background:rgba(201,169,110,0.08);border-left:3px solid var(--gold);padding:1rem 1.2rem;margin-top:0.8rem;}
 .fabric-label{font-size:0.5rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem;}
@@ -137,7 +140,7 @@ textarea{width:100%;border:1px solid rgba(201,160,154,0.3);padding:0.8rem;font-s
 </head>
 <body>
 <div class="header">
-  <div class="header-logo">HerStyleVault</div>
+  <div class="header-logo"><svg viewBox="0 0 150 150" aria-hidden="true"><circle cx="75" cy="75" r="50" fill="none" stroke="#e4d2a5" stroke-width="1.6"/><line x1="75" y1="19" x2="75" y2="27" stroke="#e4d2a5" stroke-width="1.7"/><line x1="75" y1="123" x2="75" y2="131" stroke="#e4d2a5" stroke-width="1.7"/><line x1="19" y1="75" x2="27" y2="75" stroke="#e4d2a5" stroke-width="1.7"/><line x1="123" y1="75" x2="131" y2="75" stroke="#e4d2a5" stroke-width="1.7"/><circle cx="75" cy="36" r="4.4" fill="#e4d2a5"/><line x1="75" y1="40.4" x2="75" y2="50" stroke="#e4d2a5" stroke-width="2.3" stroke-linecap="round"/><path d="M75 50 L44 76 Q38 80 44 83 L106 83 Q112 80 106 76 Z" fill="none" stroke="#e4d2a5" stroke-width="2.3" stroke-linejoin="round"/></svg>HerStyleVault</div>
   <div class="header-badge">🔓 The Unlock — Basic Analysis</div>
 </div>
 <div class="pkg-banner">
@@ -169,7 +172,7 @@ textarea{width:100%;border:1px solid rgba(201,160,154,0.3);padding:0.8rem;font-s
   <button class="resetbtn" onclick="resetColor()">Reset all answers</button>
 
   <div class="results" id="color-res">
-    <div class="rhead"><p class="rhead-label">✦ Basic Color Analysis — The Unlock</p><h2 class="rhead-title">Color <em>Blueprint</em></h2><p class="rhead-name" id="cn-color-disp"></p></div>
+    <div class="rhead"><p class="rhead-label">Basic Color Analysis — The Unlock</p><h2 class="rhead-title">Color <em>Blueprint</em></h2><p class="rhead-name" id="cn-color-disp"></p></div>
     <div class="archetype" id="color-arch"><div><div class="arch-label">✦ Style Archetype</div><div class="arch-name" id="arch-color">—</div></div><div style="font-size:0.6rem;color:rgba(255,255,255,0.5);text-align:right;">🔓 The Unlock · Basic</div></div>
     <div class="pkg-note">✦ <strong>The Unlock — Basic</strong> includes: Undertone · 3 Power Neutrals · 3 Signature Colors · Metal Tone · Colors to Avoid. Upgrade to The Vault Edit for the full palette, accent colors and accessory guide.</div>
     <div class="rcard"><p class="rcard-label">✦ Why This Is You</p><h3 class="rcard-title">Built From Your Actual Answers</h3><p style="font-size:0.8rem;color:var(--text-mid);line-height:1.9;font-weight:300;" id="color-narrative"></p></div>
@@ -200,7 +203,7 @@ textarea{width:100%;border:1px solid rgba(201,160,154,0.3);padding:0.8rem;font-s
   <button class="resetbtn" onclick="resetBody()">Reset all answers</button>
 
   <div class="results" id="body-res">
-    <div class="rhead"><p class="rhead-label">✦ Basic Body Analysis — The Unlock</p><h2 class="rhead-title">Silhouette <em>Blueprint</em></h2><p class="rhead-name" id="cn-body-disp"></p></div>
+    <div class="rhead"><p class="rhead-label">Basic Body Analysis — The Unlock</p><h2 class="rhead-title">Silhouette <em>Blueprint</em></h2><p class="rhead-name" id="cn-body-disp"></p></div>
     <div class="archetype"><div><div class="arch-label">✦ Style Archetype</div><div class="arch-name" id="arch-body">—</div></div><div style="font-size:0.6rem;color:rgba(255,255,255,0.5);text-align:right;">Run Color Analysis first ✦</div></div>
     <div class="pkg-note">✦ <strong>The Unlock — Basic</strong> includes: Body Shape · Top 3 Silhouettes · Top 2 Necklines · Top 2 Bottom Styles · Basic Fabric Guide · Top 3 Things to Avoid. Upgrade to The Vault Edit for the complete guide.</div>
     <div class="rcard"><p class="rcard-label">✦ Why This Is You</p><h3 class="rcard-title">Built From Your Actual Answers</h3><p style="font-size:0.8rem;color:var(--text-mid);line-height:1.9;font-weight:300;" id="body-narrative"></p></div>
