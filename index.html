@@ -62,17 +62,23 @@ textarea{width:100%;border:1px solid rgba(201,160,154,0.3);padding:0.8rem;font-s
 .rhead-title{font-family:'Fraunces',serif;font-size:1.8rem;color:var(--warm-white);font-weight:300;}
 .rhead-title em{font-style:italic;color:var(--gold);}
 .rhead-name{font-size:0.75rem;color:rgba(255,255,255,0.3);margin-top:0.3rem;}
-.archetype{background:var(--pkg);padding:1.2rem 2rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;}
-.arch-label{font-size:0.5rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:0.3rem;}
-.arch-name{font-family:'Fraunces',serif;font-size:1.5rem;color:var(--gold);font-style:italic;}
+.archetype{background:radial-gradient(130% 160% at 20% -20%, #6b2938 0%, var(--pkg) 55%, #3a1420 100%);padding:1.6rem 2rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;position:relative;overflow:hidden;animation:popIn 0.5s ease-out;}
+.archetype::before{content:'✦';position:absolute;top:0.6rem;right:1rem;color:var(--gold);opacity:0.3;font-size:1.4rem;}
+.archetype::after{content:'✦';position:absolute;bottom:0.4rem;left:1rem;color:var(--gold);opacity:0.2;font-size:0.9rem;}
+.arch-label{font-size:0.5rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-bottom:0.4rem;}
+.arch-name{font-family:'Fraunces',serif;font-size:1.7rem;color:var(--gold);font-style:italic;}
+.arch-emoji{font-size:2.2rem;line-height:1;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.3));}
+@keyframes popIn{0%{opacity:0;transform:translateY(10px) scale(0.97);}100%{opacity:1;transform:translateY(0) scale(1);}}
 .pkg-note{background:var(--pkg-light);border-left:3px solid var(--pkg);padding:0.8rem 1rem;margin-bottom:1rem;font-size:0.72rem;color:var(--text-mid);line-height:1.7;}
 .rcard{background:white;border:1px solid rgba(201,160,154,0.2);padding:1.5rem;margin-bottom:1rem;}
 .rcard-label{font-size:0.52rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--mauve);margin-bottom:0.5rem;}
 .rcard-title{font-family:'Fraunces',serif;font-size:1.2rem;color:var(--text-dark);margin-bottom:0.8rem;}
-.swatches{display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:0.8rem;}
-.sw{display:flex;flex-direction:column;align-items:center;gap:0.3rem;}
-.sw-circle{width:40px;height:40px;border-radius:50%;border:1px solid rgba(0,0,0,0.08);}
-.sw-name{font-size:0.45rem;color:var(--text-light);text-align:center;max-width:48px;line-height:1.3;}
+.swatches{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:0.8rem;}
+.sw{display:flex;flex-direction:column;align-items:center;gap:0.4rem;}
+.sw-circle{width:56px;height:56px;border-radius:50%;border:2px solid white;box-shadow:0 3px 10px rgba(0,0,0,0.15),0 0 0 1px rgba(0,0,0,0.06);transition:transform 0.2s ease;cursor:default;}
+.sw-circle:hover{transform:scale(1.12) translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,0.22),0 0 0 1px rgba(0,0,0,0.06);}
+.sw-name{font-size:0.5rem;color:var(--text-mid);text-align:center;max-width:64px;line-height:1.3;font-weight:400;}
+.sw-hex{font-size:0.42rem;color:var(--text-light);letter-spacing:0.03em;text-transform:uppercase;}
 .rlist{list-style:none;}
 .ritem{display:flex;align-items:flex-start;gap:0.5rem;padding:0.4rem 0;border-bottom:1px solid rgba(201,160,154,0.1);font-size:0.78rem;color:var(--text-mid);font-weight:300;line-height:1.5;}
 .ritem:last-child{border-bottom:none;}
@@ -98,18 +104,10 @@ textarea{width:100%;border:1px solid rgba(201,160,154,0.3);padding:0.8rem;font-s
 .copy-guide{border:1px solid var(--gold);color:var(--text-dark);}
 .copy-guide:hover{background:var(--gold);}
 
-/* Outfit Builds tab */
 .export-box{background:var(--blush);padding:1.4rem 1.5rem;margin-bottom:1.8rem;text-align:center;}
 .export-btn{padding:1rem 2.2rem;background:var(--deep-rose);color:#fff;border:none;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;font-family:'Jost',sans-serif;transition:opacity 0.2s;}
 .export-btn:disabled{background:#cbb2ae;cursor:not-allowed;}
 .export-note{font-size:0.66rem;color:var(--text-mid);margin-top:0.7rem;letter-spacing:0.02em;line-height:1.6;}
-.outfit-slot{background:white;border:1px solid rgba(201,160,154,0.2);padding:1.1rem 1.3rem;margin-bottom:1rem;}
-.outfit-caption{width:100%;border:1px solid rgba(201,160,154,0.3);padding:0.5rem 0.7rem;font-size:0.78rem;font-family:'Jost',sans-serif;color:var(--text-dark);margin-bottom:0.7rem;outline:none;background:var(--cream);}
-.outfit-upload-row{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;}
-.outfit-file-btn{padding:0.5rem 1rem;border:1px solid var(--pkg);color:var(--pkg);font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;white-space:nowrap;font-family:'Jost',sans-serif;}
-.outfit-file-btn:hover{background:var(--pkg);color:white;}
-.outfit-thumb-wrap{flex:1;min-height:1px;}
-.outfit-thumb{max-height:96px;max-width:150px;display:block;border:1px solid rgba(0,0,0,0.1);object-fit:cover;}
 
 /* Hidden PDF render pages */
 #pdf-root{position:fixed;top:0;left:-99999px;width:816px;}
@@ -134,8 +132,6 @@ textarea{width:100%;border:1px solid rgba(201,160,154,0.3);padding:0.8rem;font-s
 .pdf-sw-box{width:64px;height:64px;border-radius:8px;border:1px solid rgba(0,0,0,0.12);margin-bottom:0.4rem;}
 .pdf-sw-label{font-size:0.66rem;text-align:center;color:var(--text-mid);line-height:1.3;}
 .pdf-sw-hex{font-size:0.56rem;color:var(--text-light);letter-spacing:0.04em;}
-.pdf-outfit-photo{max-width:100%;max-height:100%;object-fit:contain;}
-.pdf-outfit-caption{font-family:'Fraunces',serif;font-style:italic;font-size:1.3rem;text-align:center;margin-top:1rem;color:var(--text-dark);}
 </style>
 </head>
 <body>
@@ -150,7 +146,6 @@ textarea{width:100%;border:1px solid rgba(201,160,154,0.3);padding:0.8rem;font-s
 <div class="tabs">
   <button class="tab active" onclick="switchTab('color')">🎨 Color Analysis</button>
   <button class="tab" onclick="switchTab('body')">👗 Body Analysis</button>
-  <button class="tab" onclick="switchTab('outfits')">📸 Outfit Builds</button>
 </div>
 <div class="main">
 
@@ -173,7 +168,7 @@ textarea{width:100%;border:1px solid rgba(201,160,154,0.3);padding:0.8rem;font-s
 
   <div class="results" id="color-res">
     <div class="rhead"><p class="rhead-label">Basic Color Analysis — The Unlock</p><h2 class="rhead-title">Color <em>Blueprint</em></h2><p class="rhead-name" id="cn-color-disp"></p></div>
-    <div class="archetype" id="color-arch"><div><div class="arch-label">✦ Style Archetype</div><div class="arch-name" id="arch-color">—</div></div><div style="font-size:0.6rem;color:rgba(255,255,255,0.5);text-align:right;">🔓 The Unlock · Basic</div></div>
+    <div class="archetype" id="color-arch"><div><div class="arch-label">✦ Style Archetype</div><div class="arch-name" id="arch-color">—</div></div><div class="arch-emoji" id="arch-color-emoji">✨</div></div>
     <div class="pkg-note">✦ <strong>The Unlock — Basic</strong> includes: Undertone · 3 Power Neutrals · 3 Signature Colors · Metal Tone · Colors to Avoid. Upgrade to The Vault Edit for the full palette, accent colors and accessory guide.</div>
     <div class="rcard"><p class="rcard-label">✦ Why This Is You</p><h3 class="rcard-title">Built From Your Actual Answers</h3><p style="font-size:0.8rem;color:var(--text-mid);line-height:1.9;font-weight:300;" id="color-narrative"></p></div>
     <div class="rcard"><p class="rcard-label">Color Type Identified</p><h3 class="rcard-title" id="undertone-r">—</h3><p style="font-size:0.75rem;color:var(--text-mid);line-height:1.8;font-weight:300;" id="undertone-d"></p><div class="ref-box"><div class="ref-label">✦ Reference Links</div><div class="ref-links" id="undertone-refs"></div></div></div>
@@ -204,7 +199,7 @@ textarea{width:100%;border:1px solid rgba(201,160,154,0.3);padding:0.8rem;font-s
 
   <div class="results" id="body-res">
     <div class="rhead"><p class="rhead-label">Basic Body Analysis — The Unlock</p><h2 class="rhead-title">Silhouette <em>Blueprint</em></h2><p class="rhead-name" id="cn-body-disp"></p></div>
-    <div class="archetype"><div><div class="arch-label">✦ Style Archetype</div><div class="arch-name" id="arch-body">—</div></div><div style="font-size:0.6rem;color:rgba(255,255,255,0.5);text-align:right;">Run Color Analysis first ✦</div></div>
+    <div class="archetype"><div><div class="arch-label">✦ Style Archetype</div><div class="arch-name" id="arch-body">—</div></div><div class="arch-emoji" id="arch-body-emoji">✨</div></div>
     <div class="pkg-note">✦ <strong>The Unlock — Basic</strong> includes: Body Shape · Top 3 Silhouettes · Top 2 Necklines · Top 2 Bottom Styles · Basic Fabric Guide · Top 3 Things to Avoid. Upgrade to The Vault Edit for the complete guide.</div>
     <div class="rcard"><p class="rcard-label">✦ Why This Is You</p><h3 class="rcard-title">Built From Your Actual Answers</h3><p style="font-size:0.8rem;color:var(--text-mid);line-height:1.9;font-weight:300;" id="body-narrative"></p></div>
     <div class="rcard"><p class="rcard-label">Body Shape Identified</p><h3 class="rcard-title" id="shape-r">—</h3><p style="font-size:0.75rem;color:var(--text-mid);line-height:1.8;font-weight:300;" id="shape-d"></p><div class="ref-box"><div class="ref-label">✦ Body Shape References</div><div class="ref-links" id="shape-refs"></div></div></div>
@@ -215,18 +210,11 @@ textarea{width:100%;border:1px solid rgba(201,160,154,0.3);padding:0.8rem;font-s
     <div class="rcard"><p class="rcard-label">✦ Basic Fabric Guide</p><h3 class="rcard-title">What Fabrics Work For This Shape</h3><div class="fabric-box"><p class="fabric-label">Best Fabrics ✦</p><p class="fabric-text" id="fab-good"></p></div><div class="avoid-box" style="margin-top:0.8rem;"><p class="avoid-label">Fabrics to Avoid</p><p class="avoid-text" id="fab-avoid"></p></div><div class="ref-box"><div class="ref-label">✦ Fabric References</div><div class="ref-links" id="fab-refs"></div></div></div>
     <div class="rcard"><p class="rcard-label">Top 3 Things to Step Back From</p><h3 class="rcard-title">Minimize These</h3><div class="avoid-box"><p class="avoid-label">Less Flattering For This Shape</p><ul class="rlist" id="avoid-r-body" style="margin-top:0.5rem;"></ul></div><div class="tip-box" style="margin-top:0.8rem;"><p class="tip-text">"These are guidelines not rules — everything we build together is designed specifically for your body so you always feel incredible." ✦</p></div></div>
     <div class="copy-btns"><button class="copy-btn copy-hub" onclick="copyBodyHub()">Copy for Style Hub ✦</button><button class="copy-btn copy-guide" onclick="copyBodyGuide()">Copy for Style Guide ✦</button></div>
+    <div class="export-box">
+      <button class="export-btn" id="exportPdfBtn" onclick="exportStyleGuidePDF()" disabled>📄 Export Style Guide PDF</button>
+      <p class="export-note" id="exportPdfNote">Generate both Color and Body analysis first.</p>
+    </div>
   </div>
-</div>
-
-<!-- OUTFIT BUILDS -->
-<div id="sec-outfits" class="sec">
-  <h2 class="sec-title">Outfit <em>Builds</em></h2>
-  <p class="sec-sub">Upload a photo of each finished outfit build as you style them together this session, with a short caption. These are included automatically in the exported Style Guide PDF — fill in as many or as few as you have right now.</p>
-  <div class="export-box">
-    <button class="export-btn" id="exportPdfBtn" onclick="exportStyleGuidePDF()" disabled>📄 Export Style Guide PDF</button>
-    <p class="export-note" id="exportPdfNote">Generate both Color and Body analysis first.</p>
-  </div>
-  <div id="outfit-slots"></div>
 </div>
 </div>
 
@@ -237,8 +225,6 @@ const CA={},BA={};
 let colorStepper,bodyStepper;
 const PKG_NAME='The Unlock';
 const PKG_TAG='Basic';
-const OUTFIT_COUNT=5;
-const outfits=new Array(OUTFIT_COUNT).fill(null);
 let colorGenerated=false,bodyGenerated=false;
 const archetypesBySeasonFamily={
   spring:{apple:'Soft and Unbothered',pear:"She's Just Built Different",hourglass:'The It Girl',rectangle:'The Vibe Curator',inverted:'Boss Energy'},
@@ -322,7 +308,9 @@ const bodyData={
 
 function switchTab(t){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.sec').forEach(x=>x.classList.remove('active'));document.querySelector(`[onclick="switchTab('${t}')"]`).classList.add('active');document.getElementById(`sec-${t}`).classList.add('active');}
 function sel(btn,k,v){btn.parentElement.querySelectorAll('.qopt').forEach(b=>b.classList.remove('sel'));btn.classList.add('sel');(btn.closest('#sec-color')?CA:BA)[k]=v;}
-function renderSW(id,arr){document.getElementById(id).innerHTML=arr.map(s=>`<div class="sw"><div class="sw-circle" style="background:${s.h};"></div><span class="sw-name">${s.n}</span></div>`).join('');}
+function renderSW(id,arr){document.getElementById(id).innerHTML=arr.map(s=>`<div class="sw"><div class="sw-circle" style="background:${s.h};" title="${s.n} · ${s.h.toUpperCase()}"></div><span class="sw-name">${s.n}<br><span class="sw-hex">${s.h.toUpperCase()}</span></span></div>`).join('');}
+const SEASON_EMOJI={spring:'🌸',summer:'☀️',autumn:'🍂',winter:'❄️'};
+function metalEmoji(metalText){const t=(metalText||'').toLowerCase();if(t.includes('gold')&&t.includes('silver'))return'🥇🥈';if(t.includes('gold'))return'🥇';if(t.includes('silver')||t.includes('platinum')||t.includes('pewter'))return'🥈';return'✨';}
 function renderRefs(id,arr){document.getElementById(id).innerHTML=arr.map(r=>`<a href="${r.u}" target="_blank" class="ref-link">${r.l} ↗</a>`).join('');}
 function genColor(){
   const name=document.getElementById('cn-color').value||'Client';
@@ -332,9 +320,10 @@ function genColor(){
   document.getElementById('color-narrative').textContent=buildColorNarrative(CA,axes,d);
   document.getElementById('undertone-r').textContent=d.label||d.undertone;
   document.getElementById('undertone-d').textContent=d.desc;
-  document.getElementById('metal-r').textContent=d.metal;
+  document.getElementById('metal-r').textContent=`${metalEmoji(d.metal)} ${d.metal}`;
   document.getElementById('avoid-r').textContent=d.avoid;
   document.getElementById('arch-color').textContent=arch;
+  document.getElementById('arch-color-emoji').textContent=SEASON_EMOJI[family]||'✨';
   renderSW('neutral-sw',d.neutrals);renderSW('sig-sw',d.signature);
   renderRefs('undertone-refs',d.uRefs);renderRefs('neutral-refs',d.nRefs);renderRefs('sig-refs',d.sRefs);
   document.getElementById('color-res').classList.add('vis');
@@ -351,6 +340,8 @@ function genBody(){
   document.getElementById('shape-d').textContent=d.desc;
   document.getElementById('goal-r').textContent=d.goal;
   document.getElementById('arch-body').textContent=arch;
+  const shapeEmojiMatch=(d.shape||'').match(/^(\S+)/);
+  document.getElementById('arch-body-emoji').textContent=shapeEmojiMatch?shapeEmojiMatch[1]:'✨';
   document.getElementById('sil-r').innerHTML=d.sils.map(s=>`<li class="ritem">${s}</li>`).join('');
   document.getElementById('neck-r').innerHTML=d.necks.map(s=>`<li class="ritem">${s}</li>`).join('');
   document.getElementById('bot-r').innerHTML=d.bots.map(s=>`<li class="ritem">${s}</li>`).join('');
@@ -395,41 +386,12 @@ function copyBodyGuide(){
 function resetColor(){document.querySelectorAll('#sec-color .qopt').forEach(b=>b.classList.remove('sel'));document.getElementById('cnotes').value='';document.getElementById('color-res').classList.remove('vis');Object.keys(CA).forEach(k=>delete CA[k]);colorGenerated=false;updateExportState();if(colorStepper)colorStepper.reset();}
 function resetBody(){document.querySelectorAll('#sec-body .qopt').forEach(b=>b.classList.remove('sel'));document.getElementById('bnotes').value='';document.getElementById('body-res').classList.remove('vis');Object.keys(BA).forEach(k=>delete BA[k]);bodyGenerated=false;updateExportState();if(bodyStepper)bodyStepper.reset();}
 
-/* ===== Outfit Builds ===== */
-function renderOutfitSlots(){
-  const wrap=document.getElementById('outfit-slots');
-  let html='';
-  for(let i=0;i<OUTFIT_COUNT;i++){
-    html+=`<div class="outfit-slot">
-      <p class="qlabel">Outfit ${i+1}</p>
-      <input type="text" class="outfit-caption" id="outfit-caption-${i}" placeholder="Outfit ${i+1} — e.g. Weekend Brunch" oninput="updateOutfitCaption(${i},this.value)">
-      <div class="outfit-upload-row">
-        <label class="outfit-file-btn">Upload Photo<input type="file" accept="image/*" style="display:none" onchange="handleOutfitUpload(event,${i})"></label>
-        <div class="outfit-thumb-wrap" id="outfit-thumb-${i}"></div>
-      </div>
-    </div>`;
-  }
-  wrap.innerHTML=html;
-}
-function handleOutfitUpload(evt,i){
-  const file=evt.target.files[0];if(!file)return;
-  const reader=new FileReader();
-  reader.onload=e=>{
-    outfits[i]=outfits[i]||{};
-    outfits[i].img=e.target.result;
-    document.getElementById('outfit-thumb-'+i).innerHTML=`<img src="${e.target.result}" class="outfit-thumb"/>`;
-    updateExportState();
-  };
-  reader.readAsDataURL(file);
-}
-function updateOutfitCaption(i,val){outfits[i]=outfits[i]||{};outfits[i].caption=val;}
 function updateExportState(){
   const btn=document.getElementById('exportPdfBtn'),note=document.getElementById('exportPdfNote');
   if(!btn)return;
   if(colorGenerated&&bodyGenerated){
     btn.disabled=false;
-    const n=outfits.filter(o=>o&&o.img).length;
-    note.textContent=`Ready to export. ${n} of ${OUTFIT_COUNT} outfit build photo(s) added so far — photos are optional.`;
+    note.textContent='Ready to export your Style Guide PDF ✦';
   }else{
     btn.disabled=true;
     note.textContent='Generate both Color and Body analysis first.';
@@ -529,16 +491,6 @@ function buildPdfPages(){
     <p class="pdf-section-label">Things to Minimize</p>${pdfList(bd.avd)}
     ${pdfFoot(PKG_NAME+' — Fabric Guide')}`));
 
-  outfits.forEach((o,i)=>{
-    if(!o||!o.img)return;
-    pages.push(pdfPage('pdf-outfit',`<h1 class="pdf-h1" style="text-align:center;">Outfit Build <em>${i+1}</em></h1>
-      <div style="display:flex;align-items:center;justify-content:center;height:760px;">
-        <img src="${o.img}" class="pdf-outfit-photo"/>
-      </div>
-      <div class="pdf-outfit-caption">${pdfEsc(o.caption||('Outfit '+(i+1)))}</div>
-      ${pdfFoot(PKG_NAME+' — Outfit Builds')}`));
-  });
-
   pages.push(pdfPage('pdf-closing',`
     <div class="pdf-logo">HerStyleVault</div>
     <p style="font-family:'Fraunces',serif;font-style:italic;font-size:1.4rem;color:var(--deep-rose);max-width:560px;margin:1.5rem 0;line-height:1.6;">"Thank you for trusting me with your style journey. This guide is yours to keep and revisit — every piece was chosen with you in mind."</p>
@@ -630,7 +582,6 @@ function initStepper(section){
 }
 colorStepper=initStepper('color');
 bodyStepper=initStepper('body');
-renderOutfitSlots();
 updateExportState();
 </script>
 </body>
