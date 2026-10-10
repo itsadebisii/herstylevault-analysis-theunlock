@@ -190,9 +190,11 @@ textarea{width:100%;border:1px solid rgba(201,160,154,0.3);padding:0.8rem;font-s
   <div class="qcard"><p class="qlabel">Question 03</p><p class="qtext">"Are there styles you always gravitate toward?"</p><div class="qopts"><button class="qopt" onclick="sel(this,'style','flowy')">Flowy and loose</button><button class="qopt" onclick="sel(this,'style','fitted')">Fitted and structured</button><button class="qopt" onclick="sel(this,'style','waist')">Anything that defines the waist</button><button class="qopt" onclick="sel(this,'style','oversized')">Oversized and relaxed</button></div></div>
   <div class="qcard"><p class="qlabel">Question 04</p><p class="qtext">"Dresses or separates?"</p><div class="qopts"><button class="qopt" onclick="sel(this,'dress','dresses')">Dresses work better</button><button class="qopt" onclick="sel(this,'dress','separates')">Separates work better</button><button class="qopt" onclick="sel(this,'dress','both')">Both equally</button></div></div>
   <div class="qcard"><p class="qlabel">Question 05</p><p class="qtext">"Where do you feel most confident in your body?"</p><div class="qopts"><button class="qopt" onclick="sel(this,'conf','shoulders')">Shoulders / collarbone</button><button class="qopt" onclick="sel(this,'conf','waist')">Waist</button><button class="qopt" onclick="sel(this,'conf','legs')">Legs</button><button class="qopt" onclick="sel(this,'conf','bust')">Bust</button><button class="qopt" onclick="sel(this,'conf','overall')">Overall confident</button></div></div>
-  <div class="qcard"><p class="qlabel">Question 06 — Your Observation</p><p class="qtext">Your assessment of their body shape?</p><div class="qopts"><button class="qopt" onclick="sel(this,'shape','apple')">🍎 Apple — fuller midsection</button><button class="qopt" onclick="sel(this,'shape','pear')">🍐 Pear — fuller hips & thighs</button><button class="qopt" onclick="sel(this,'shape','hourglass')">⌛ Hourglass — defined waist</button><button class="qopt" onclick="sel(this,'shape','rectangle')">📏 Rectangle — similar measurements</button><button class="qopt" onclick="sel(this,'shape','inverted')">🔺 Inverted Triangle — broader shoulders</button></div></div>
-  <div class="qcard"><p class="qlabel">Question 07</p><p class="qtext">"What's your height range?"</p><div class="qopts"><button class="qopt" onclick="sel(this,'height','petite')">Petite — under 5'4"</button><button class="qopt" onclick="sel(this,'height','average')">Average — 5'4" to 5'7"</button><button class="qopt" onclick="sel(this,'height','tall')">Tall — 5'8" and up</button></div></div>
-  <div class="qcard"><p class="qlabel">Question 08</p><p class="qtext">"Do you have a longer torso or longer legs?"</p><div class="qopts"><button class="qopt" onclick="sel(this,'proportion','longTorso')">Longer torso</button><button class="qopt" onclick="sel(this,'proportion','longLegs')">Longer legs</button><button class="qopt" onclick="sel(this,'proportion','balanced')">Pretty balanced</button></div></div>
+  <div class="qcard"><p class="qlabel">Question 06 — Your Observation</p><p class="qtext">How do their shoulders compare to their hips?</p><div class="qopts"><button class="qopt" onclick="sel(this,'shoulderHip','shouldersWider')">Shoulders clearly wider than hips</button><button class="qopt" onclick="sel(this,'shoulderHip','hipsWider')">Hips clearly wider than shoulders</button><button class="qopt" onclick="sel(this,'shoulderHip','equal')">Shoulders and hips about the same width</button><button class="qopt" onclick="sel(this,'shoulderHip','hipsWiderShouldersFull')">Hips wider, but shoulders full too</button></div></div>
+  <div class="qcard"><p class="qlabel">Question 07 — Your Observation</p><p class="qtext">How defined is their waist?</p><div class="qopts"><button class="qopt" onclick="sel(this,'waistDef','veryDefined')">Very defined — much smaller than bust and hips</button><button class="qopt" onclick="sel(this,'waistDef','slightlyDefined')">Slightly defined</button><button class="qopt" onclick="sel(this,'waistDef','barelyDefined')">Barely any waist definition</button><button class="qopt" onclick="sel(this,'waistDef','fullMidsection')">Full midsection — waist is the widest part</button></div></div>
+  <div class="qcard"><p class="qlabel">Question 08 — Your Observation</p><p class="qtext">How does their bust compare to their hips?</p><div class="qopts"><button class="qopt" onclick="sel(this,'bustHip','bustLarger')">Bust noticeably larger than hips</button><button class="qopt" onclick="sel(this,'bustHip','hipsLarger')">Hips noticeably larger than bust</button><button class="qopt" onclick="sel(this,'bustHip','roughlyEqual')">Bust and hips roughly equal</button><button class="qopt" onclick="sel(this,'bustHip','fullBoth')">Full bust and full hips, both prominent</button></div></div>
+  <div class="qcard"><p class="qlabel">Question 09</p><p class="qtext">"What's your height range?"</p><div class="qopts"><button class="qopt" onclick="sel(this,'height','petite')">Petite — under 5'4"</button><button class="qopt" onclick="sel(this,'height','average')">Average — 5'4" to 5'7"</button><button class="qopt" onclick="sel(this,'height','tall')">Tall — 5'8" and up</button></div></div>
+  <div class="qcard"><p class="qlabel">Question 10</p><p class="qtext">"Do you have a longer torso or longer legs?"</p><div class="qopts"><button class="qopt" onclick="sel(this,'proportion','longTorso')">Longer torso</button><button class="qopt" onclick="sel(this,'proportion','longLegs')">Longer legs</button><button class="qopt" onclick="sel(this,'proportion','balanced')">Pretty balanced</button></div></div>
   <div class="qcard"><p class="qlabel">Things to Remember</p><textarea id="bnotes" placeholder="Height, proportions, posture, specific notes..."></textarea></div>
   <button class="genbtn" onclick="genBody()">Generate Basic Body Analysis ✦</button>
   <button class="resetbtn" onclick="resetBody()">Reset all answers</button>
@@ -258,6 +260,26 @@ const SEASON_TABLE={
 };
 function getSeason(a){const axes=computeColorAxes(a);return{key:SEASON_TABLE[axes.undertone][axes.chroma][axes.value],axes};}
 function getUT(){return getSeason(CA).axes.undertone;}
+
+function computeBodyShape(a){
+  const score={apple:0,pear:0,hourglass:0,rectangle:0,inverted:0};
+  if(a.shoulderHip==='shouldersWider')score.inverted+=2;
+  if(a.shoulderHip==='hipsWider')score.pear+=2;
+  if(a.shoulderHip==='equal'){score.hourglass+=1;score.rectangle+=1;}
+  if(a.shoulderHip==='hipsWiderShouldersFull')score.pear+=1;
+  if(a.waistDef==='veryDefined'){score.hourglass+=2;score.pear+=1;score.inverted+=1;}
+  if(a.waistDef==='slightlyDefined'){score.pear+=1;score.inverted+=1;score.rectangle+=1;}
+  if(a.waistDef==='barelyDefined')score.rectangle+=2;
+  if(a.waistDef==='fullMidsection')score.apple+=3;
+  if(a.bustHip==='bustLarger'){score.apple+=1;score.inverted+=1;}
+  if(a.bustHip==='hipsLarger')score.pear+=2;
+  if(a.bustHip==='roughlyEqual'){score.hourglass+=1;score.rectangle+=1;}
+  if(a.bustHip==='fullBoth'){score.hourglass+=1;score.apple+=1;}
+  let best='hourglass',bestScore=-1;
+  const order=['hourglass','pear','inverted','apple','rectangle'];
+  order.forEach(k=>{if(score[k]>bestScore){bestScore=score[k];best=k;}});
+  return best;
+}
 
 function buildColorNarrative(a,axes,season){
   const jewelryText={gold:'gold jewelry looks best on you',silver:'silver jewelry looks best on you',both:'both gold and silver look equally good on you',unsure:"you weren't sure which metal suits you best"}[a.jewelry]||'';
@@ -332,7 +354,8 @@ function genColor(){
 }
 function genBody(){
   const name=document.getElementById('cn-body').value||'Client';
-  const shape=BA.shape;if(!shape){alert('Please select a body shape in Question 06');return;}
+  if(!BA.shoulderHip||!BA.waistDef||!BA.bustHip){alert('Please answer the shoulder/hip, waist and bust/hip observation questions first.');return;}
+  const shape=computeBodyShape(BA);BA.shape=shape;
   const d=bodyData[shape];const{key:seasonKey}=getSeason(CA);const family=SEASON_FAMILY[seasonKey];const arch=archetypesBySeasonFamily[family]?.[shape]||'That Girl ✦';
   document.getElementById('cn-body-disp').textContent=name;
   document.getElementById('body-narrative').textContent=buildBodyNarrative(BA,d);
