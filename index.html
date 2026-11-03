@@ -106,10 +106,13 @@ textarea{width:100%;border:1px solid rgba(201,160,154,0.3);padding:0.8rem;font-s
 .copy-guide{border:1px solid var(--gold);color:var(--text-dark);}
 .copy-guide:hover{background:var(--gold);}
 
-.export-box{background:var(--blush);padding:1.4rem 1.5rem;margin-bottom:1.8rem;text-align:center;}
-.export-btn{padding:1rem 2.2rem;background:var(--deep-rose);color:#fff;border:none;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;font-family:'Inter',sans-serif;transition:opacity 0.2s;}
-.export-btn:disabled{background:#cbb2ae;cursor:not-allowed;}
-.export-note{font-size:0.66rem;color:var(--text-mid);margin-top:0.7rem;letter-spacing:0.02em;line-height:1.6;}
+.export-box{background:var(--pkg);border-radius:20px;padding:2.2rem 2.5rem;margin-bottom:1.8rem;display:flex;flex-direction:column;align-items:center;gap:0.6rem;text-align:center;}
+.export-tag{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);}
+.export-head{margin:0;font-family:'Playfair Display',serif;font-weight:500;font-size:1.4rem;color:#fff9f6;}
+.export-head em{font-style:italic;color:var(--gold);}
+.export-btn{padding:0.7rem 1.4rem;border-radius:999px;background:var(--gold);color:#1a1010;border:none;font-size:0.7rem;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;cursor:pointer;font-family:'Inter',sans-serif;transition:opacity 0.2s;margin-top:0.4rem;}
+.export-btn:disabled{opacity:0.45;cursor:not-allowed;}
+.export-note{font-size:0.78rem;color:rgba(255,249,246,0.75);margin:0;max-width:46ch;line-height:1.6;}
 
 /* Hidden PDF render pages */
 #pdf-root{position:fixed;top:0;left:-99999px;width:816px;}
@@ -215,8 +218,10 @@ textarea{width:100%;border:1px solid rgba(201,160,154,0.3);padding:0.8rem;font-s
     <div class="rcard"><p class="rcard-label">Top 3 Things to Step Back From</p><h3 class="rcard-title">Minimize These</h3><div class="avoid-box"><p class="avoid-label">Less Flattering For This Shape</p><ul class="rlist" id="avoid-r-body" style="margin-top:0.5rem;"></ul></div><div class="tip-box" style="margin-top:0.8rem;"><p class="tip-text">"These are guidelines not rules — everything we build together is designed specifically for your body so you always feel incredible." ✦</p></div></div>
     <div class="copy-btns"><button class="copy-btn copy-hub" onclick="copyBodyHub()">Copy for Style Hub ✦</button><button class="copy-btn copy-guide" onclick="copyBodyGuide()">Copy for Style Guide ✦</button></div>
     <div class="export-box">
-      <button class="export-btn" id="exportPdfBtn" onclick="exportStyleGuidePDF()" disabled>📄 Export Style Guide PDF</button>
+      <span class="export-tag" id="exportTag">Step 2 of 2 · Almost there ✦</span>
+      <h3 class="export-head">Her full <em>Color + Style</em> story</h3>
       <p class="export-note" id="exportPdfNote">Generate both Color and Body analysis first.</p>
+      <button class="export-btn" id="exportPdfBtn" onclick="exportStyleGuidePDF()" disabled>⤓ Download Full Report (PDF)</button>
     </div>
   </div>
 </div>
@@ -469,14 +474,19 @@ function resetColor(){document.querySelectorAll('#sec-color .qopt').forEach(b=>b
 function resetBody(){document.querySelectorAll('#sec-body .qopt').forEach(b=>b.classList.remove('sel'));document.getElementById('bnotes').value='';document.getElementById('body-res').classList.remove('vis');Object.keys(BA).forEach(k=>delete BA[k]);bodyGenerated=false;updateExportState();if(bodyStepper)bodyStepper.reset();}
 
 function updateExportState(){
-  const btn=document.getElementById('exportPdfBtn'),note=document.getElementById('exportPdfNote');
+  const btn=document.getElementById('exportPdfBtn'),note=document.getElementById('exportPdfNote'),tag=document.getElementById('exportTag');
   if(!btn)return;
   if(colorGenerated&&bodyGenerated){
     btn.disabled=false;
-    note.textContent='Ready to export your Style Guide PDF ✦';
+    const{key:seasonKey}=getSeason(CA);
+    const seasonLabel=colorData[seasonKey].label;
+    const shapeLabel=intensityLabel(BA.shape,BA.intensity);
+    note.textContent=`${seasonLabel}, ${shapeLabel} — one report, one download.`;
+    if(tag)tag.textContent='Step 2 of 2 · Complete ✦';
   }else{
     btn.disabled=true;
     note.textContent='Generate both Color and Body analysis first.';
+    if(tag)tag.textContent='Step 2 of 2 · Almost there ✦';
   }
 }
 
