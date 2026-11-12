@@ -140,9 +140,15 @@ textarea{width:100%;border:1px solid rgba(201,160,154,0.3);padding:0.8rem;font-s
 .pdf-list li::before{content:'✦ ';color:var(--pkg);}
 .pdf-swatches{display:flex;flex-wrap:wrap;gap:1.1rem;margin-bottom:1rem;}
 .pdf-sw{display:flex;flex-direction:column;align-items:center;width:88px;}
-.pdf-sw-box{width:64px;height:64px;border-radius:8px;border:1px solid rgba(0,0,0,0.12);margin-bottom:0.4rem;}
-.pdf-sw-label{font-size:0.66rem;text-align:center;color:var(--text-mid);line-height:1.3;}
+.pdf-sw-box{width:68px;height:68px;object-fit:contain;margin-bottom:0.4rem;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.1));}
+.pdf-sw-label{font-size:0.68rem;text-align:center;color:var(--text-mid);line-height:1.3;font-weight:500;}
 .pdf-sw-hex{font-size:0.56rem;color:var(--text-light);letter-spacing:0.04em;}
+.pdf-colorband{background:var(--pkg);border-radius:16px;padding:1.4rem 1.6rem;margin-bottom:1.3rem;}
+.pdf-colorband .pdf-section-label{color:var(--gold);margin-top:0;}
+.pdf-colorband h1{font-family:'Playfair Display',serif;font-size:1.7rem;color:#fff9f6;font-weight:400;margin:0;}
+.pdf-colorband h1 em{color:var(--gold);font-style:italic;}
+.pdf-shaperow{display:flex;align-items:center;gap:0.9rem;}
+.pdf-shaperow img{width:64px;height:64px;object-fit:contain;border-radius:10px;background:#fff;border:1px solid rgba(201,160,154,0.3);flex-shrink:0;}
 </style>
 </head>
 <body>
@@ -512,7 +518,7 @@ function updateExportState(){
 function pdfEsc(s){return(s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function pdfPage(cls,inner){return `<div class="pdf-page ${cls||''}">${inner}</div>`;}
 function pdfFoot(label){return `<div class="pdf-foot"><span>HerStyleVault</span><span>${pdfEsc(label)}</span></div>`;}
-function pdfSwatches(arr){return `<div class="pdf-swatches">${arr.map(c=>`<div class="pdf-sw"><div class="pdf-sw-box" style="background:${c.h};"></div><div class="pdf-sw-label">${pdfEsc(c.n)}<br><span class="pdf-sw-hex">${c.h.toUpperCase()}</span></div></div>`).join('')}</div>`;}
+function pdfSwatches(arr,seasonKey){return `<div class="pdf-swatches">${arr.map(c=>`<div class="pdf-sw"><img class="pdf-sw-box" src="${(SWATCH_SHAPES[seasonKey]&&SWATCH_SHAPES[seasonKey][c.n])||''}"/><div class="pdf-sw-label">${pdfEsc(c.n)}</div></div>`).join('')}</div>`;}
 function pdfList(arr){return `<ul class="pdf-list">${arr.map(i=>`<li>${pdfEsc(i)}</li>`).join('')}</ul>`;}
 
 function buildPdfPages(){
@@ -530,24 +536,13 @@ function buildPdfPages(){
     <div class="pdf-date">Prepared ${dateStr} · by Adebisi</div>
   `));
 
-  pages.push(pdfPage('',`
-    <p class="pdf-section-label">✦ Style Archetype</p>
-    <h1 class="pdf-h1"><em>${pdfEsc(arch)}</em></h1>
-    <div class="pdf-box"><p class="pdf-section-label" style="margin-top:0;">Color Type Identified</p><h2 class="pdf-h1" style="font-size:1.25rem;">${pdfEsc(d.label||d.undertone)}</h2>${pdfEsc(d.desc)}</div>
-    <p class="pdf-section-label">✦ Why This Is You</p><div class="pdf-box">${pdfEsc(colorNarrative)}</div>
-    ${pdfFoot(PKG_NAME+' — Color Analysis')}
-  `));
-
-  let paletteInner=`<p class="pdf-section-label" style="margin-top:0;">Power Neutrals</p>${pdfSwatches(d.neutrals)}<p class="pdf-section-label">Signature Colors</p>${pdfSwatches(d.signature)}`;
-  if(d.accents)paletteInner+=`<p class="pdf-section-label">Accent Colors</p>${pdfSwatches(d.accents)}`;
-  paletteInner+=`<p class="pdf-section-label">Metal Tone</p><div class="pdf-box">${pdfEsc(d.metal)}</div>`;
-  pages.push(pdfPage('',`<h1 class="pdf-h1">Your <em>Palette</em></h1>${paletteInner}${pdfFoot(PKG_NAME+' — Color Palette')}`));
-
-  let patInner='';
-  if(d.accessory)patInner+=`<p class="pdf-section-label" style="margin-top:0;">Accessory Color Guide</p><div class="pdf-box">${pdfEsc(d.accessory)}</div>`;
-  if(d.patterns)patInner+=`<p class="pdf-section-label">Pattern & Print Guidance</p>${pdfList(d.patterns)}`;
-  patInner+=`<p class="pdf-section-label">Colors to Avoid</p><div class="pdf-box">${pdfEsc(d.avoid)}</div>`;
-  pages.push(pdfPage('',`<h1 class="pdf-h1">Pattern & <em>Avoid</em></h1>${patInner}${pdfFoot(PKG_NAME+' — Color Guidance')}`));
+  let colorInner=`<div class="pdf-colorband"><p class="pdf-section-label">✦ Style Archetype</p><h1>${pdfEsc(name)}, you're a <em>${pdfEsc(d.label||d.undertone)}</em></h1></div>`;
+  colorInner+=`<p class="pdf-section-label" style="margin-top:0;">✦ Why This Is You</p><div class="pdf-box">${pdfEsc(colorNarrative)}</div>`;
+  colorInner+=`<p class="pdf-section-label">Power Neutrals</p>${pdfSwatches(d.neutrals,seasonKey)}<p class="pdf-section-label">Signature Colors</p>${pdfSwatches(d.signature,seasonKey)}`;
+  if(d.accents)colorInner+=`<p class="pdf-section-label">Accent Colors</p>${pdfSwatches(d.accents,seasonKey)}`;
+  colorInner+=`<p class="pdf-section-label">Metal Tone</p><div class="pdf-box">${pdfEsc(d.metal)}</div>`;
+  colorInner+=`<p class="pdf-section-label">Colors to Avoid</p><div class="pdf-box">${pdfEsc(d.avoid)}</div>`;
+  pages.push(pdfPage('',`${colorInner}${pdfFoot(PKG_NAME+' — Color Analysis')}`));
 
   if(d.seasonal){
     pages.push(pdfPage('',`<h1 class="pdf-h1">Seasonal & <em>Occasion</em> Color</h1>
@@ -561,8 +556,9 @@ function buildPdfPages(){
       ${pdfFoot(PKG_NAME+' — Exclusive Beauty Direction')}`));
   }
 
-  pages.push(pdfPage('',`<p class="pdf-section-label">✦ Body Shape</p><h1 class="pdf-h1">${pdfEsc(intensityLabel(shape,BA.intensity))}</h1>
-    <div class="pdf-box">${pdfEsc(intensityDesc(shape,BA.intensity))}</div>
+  pages.push(pdfPage('',`<p class="pdf-section-label">✦ Body Shape</p>
+    <div class="pdf-shaperow"><img src="${SHAPE_ICONS[shape]||''}"/><h1 class="pdf-h1" style="margin:0;">${pdfEsc(intensityLabel(shape,BA.intensity))}</h1></div>
+    <div class="pdf-box" style="margin-top:1rem;">${pdfEsc(intensityDesc(shape,BA.intensity))}</div>
     <p class="pdf-section-label">✦ Why This Is You</p><div class="pdf-box">${pdfEsc(bodyNarrative)}</div>
     <p class="pdf-section-label">Styling Goal</p><div class="pdf-box" style="font-style:italic;">${pdfEsc(bd.goal)}</div>
     ${pdfFoot(PKG_NAME+' — Body Analysis')}`));
@@ -574,7 +570,10 @@ function buildPdfPages(){
       <p class="pdf-section-label" style="margin-top:0;">Best Silhouettes</p>${pdfList(bd.sils)}
       <p class="pdf-section-label">${pdfEsc(topsLabel)}</p>${pdfList(topsArr)}
       <p class="pdf-section-label">Best Bottoms</p>${pdfList(bd.bots)}
-      ${pdfFoot(PKG_NAME+' — Silhouette Guide')}`));
+      <p class="pdf-section-label">Best Fabrics</p><div class="pdf-box">${pdfEsc(bd.fabGood)}</div>
+      <p class="pdf-section-label">Fabrics to Avoid</p><div class="pdf-box">${pdfEsc(bd.fabAvoid)}</div>
+      <p class="pdf-section-label">Things to Minimize</p>${pdfList(bd.avd)}
+      ${pdfFoot(PKG_NAME+' — Silhouette & Fabric Guide')}`));
   }else{
     pages.push(pdfPage('',`<h1 class="pdf-h1">Silhouette <em>Guide</em></h1>
       <p class="pdf-section-label" style="margin-top:0;">Complete Silhouette Guide</p>${pdfList(bd.sils)}
@@ -595,11 +594,13 @@ function buildPdfPages(){
       ${pdfFoot(PKG_NAME+' — Shopping Intelligence')}`));
   }
 
-  pages.push(pdfPage('',`<h1 class="pdf-h1">Fabric & <em>Avoid List</em></h1>
-    <p class="pdf-section-label" style="margin-top:0;">Best Fabrics</p><div class="pdf-box">${pdfEsc(bd.fabGood)}</div>
-    <p class="pdf-section-label">Fabrics to Avoid</p><div class="pdf-box">${pdfEsc(bd.fabAvoid)}</div>
-    <p class="pdf-section-label">Things to Minimize</p>${pdfList(bd.avd)}
-    ${pdfFoot(PKG_NAME+' — Fabric Guide')}`));
+  if(bd.acc){
+    pages.push(pdfPage('',`<h1 class="pdf-h1">Fabric & <em>Avoid List</em></h1>
+      <p class="pdf-section-label" style="margin-top:0;">Best Fabrics</p><div class="pdf-box">${pdfEsc(bd.fabGood)}</div>
+      <p class="pdf-section-label">Fabrics to Avoid</p><div class="pdf-box">${pdfEsc(bd.fabAvoid)}</div>
+      <p class="pdf-section-label">Things to Minimize</p>${pdfList(bd.avd)}
+      ${pdfFoot(PKG_NAME+' — Fabric Guide')}`));
+  }
 
   pages.push(pdfPage('pdf-closing',`
     <div class="pdf-logo">HerStyleVault</div>
